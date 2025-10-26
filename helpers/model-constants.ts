@@ -4,7 +4,8 @@ const MONGODB = {
     OTP_CODES: 'otp_codes',
     BO_USERS: 'bo_users',
     HOMESTAY: 'homestay',
-    HOMESTAY_BOOKED:'homestay_booked'
+    HOMESTAY_BOOKED: 'homestay_booked',
+    PAYMENt: 'payment'
   }
 }
 

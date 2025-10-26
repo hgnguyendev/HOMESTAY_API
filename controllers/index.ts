@@ -4,6 +4,7 @@ import UserRouter from './users/users.router';
 import BoUserRouter from './bo_users/bo_user.router'
 import boHomestayRouter from './bo_homestay/bo_homestay.router';
 import homestayBookedRouter from './homestay_booked/homestay_booked.router';
+import PaymentRouter from './payment/payment.router';
 import OtpRouter from './otp/otp.router';
 
 const router = express.Router();
@@ -12,7 +13,8 @@ router.use('/users', UserRouter);
 router.use('/otp', OtpRouter);
 router.use('/bo-users', verifyFirebaseTokenBo, BoUserRouter);
 router.use('/homestay', boHomestayRouter);
-router.use('/homestay-booking', homestayBookedRouter)
+router.use('/homestay-booking', homestayBookedRouter);
+router.use('/payment',PaymentRouter)
 
 router.get('/', (req: Request, res: Response) => {
     res.send('Hello, AI PLATFORM API');

@@ -2,6 +2,7 @@ import BoUserComponent from "../components/bo-users.component";
 import HomeStayBookedComponent from "../components/homestay-booked.component";
 import HomeStayComponent from "../components/homestay.component";
 import OtpComponent from "../components/otp.component";
+import PaymentComponent from "../components/payment.component";
 import UsersComponent from "../components/users.component";
 
 class Facade {
@@ -10,7 +11,7 @@ class Facade {
     private _otpComponent = new OtpComponent();
     private _homestayComponent = new HomeStayComponent();
     private _homestayBookedComponent = new HomeStayBookedComponent();
-
+    private _paymentComponent = new PaymentComponent();
     createUser(data: any) {
         return this._userComponent.createUser(data);
     }
@@ -37,30 +38,35 @@ class Facade {
 
 
     //Homestay Component
-    createHomestay(data:any){
+    createHomestay(data: any) {
         return this._homestayComponent.createHomestay(data);
     }
 
-    getAllHomeStay(){
+    getAllHomeStay() {
         return this._homestayComponent.getAllHomeStay()
     }
 
-    deleteHomestay(id:any){
+    deleteHomestay(id: any) {
         return this._homestayComponent.deleteHomestay(id)
     }
 
-    editHomestay(id:any,data:any){
-        return this._homestayComponent.editHomestay(id,data)
+    editHomestay(id: any, data: any) {
+        return this._homestayComponent.editHomestay(id, data)
     }
 
-    searchHomeStay(data:any){
+    searchHomeStay(data: any) {
         return this._homestayComponent.searchHomestay(data);
     }
 
     //Homestay booked
 
-    createHomestayBooked(user:any,data:any){
-        return this._homestayBookedComponent.createHomestayBooked(user,data)
+    createHomestayBooked(user: any, data: any) {
+        return this._homestayBookedComponent.createHomestayBooked(user, data)
+    }
+
+    //payment 
+    createPayment(data:any) {
+        return this._paymentComponent.createPayment(data);
     }
 
 }

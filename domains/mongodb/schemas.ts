@@ -78,10 +78,25 @@ const HOMESTAY_BOOKED = new Schema(
     next();
 })
 
+const PAYMENT = new Schema({
+    orderId: String,
+    userId: String,
+    amount: Number,
+    currency: String,
+    paymentMethod: String,
+    txnRef: String,
+    responseCode: String,
+    status: String,
+    paymentDate: Date,
+}, {
+    timestamps: true
+})
+
 export const SCHEMAS = {
     USERS,
     OTP_CODES,
     BO_USERS,
     HOMESTAY,
-    HOMESTAY_BOOKED
+    HOMESTAY_BOOKED,
+    PAYMENT
 }

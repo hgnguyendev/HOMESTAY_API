@@ -1,0 +1,13 @@
+/node_modules
+/.idea
+/.nyc_output
+/npm-debug.log
+/.env
+/.snyk
+/invoice-tmp
+/.logs
+/puppeteer/
+/.vscode
+.vscode/settings.json
+configs/firebase-account-user.json
+configs/firebase-account-admin.json

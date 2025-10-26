@@ -19,6 +19,10 @@ const sysConfig = {
     cloudinary_api_key: process.env.CLOUDINARY_API_KEY,
     cloudinary_api_secret: process.env.CLOUDINARY_API_SECRET,
     cloudinary_cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    tmn_code: process.env.TMN_CODE,
+    vnp_hashsecret: process.env.VNP_HASHSECRET,
+    vnp_url: process.env.VNP_URL,
+    vnp_url_return: process.env.VNP_URL_RETURN,
 
     log: (env?: keyof typeof log) => {
         if (env && log[env]) return log[env]();
