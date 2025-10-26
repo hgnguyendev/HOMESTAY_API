@@ -28,6 +28,7 @@ class UsersComponent extends BaseComponent {
                 phone: 1,
                 user_id: 1,
                 role: 1,
+                address: 1,
                 tokens: 1,
             };
             const user = await this._userEntity.getById(userId, fields);
@@ -40,6 +41,16 @@ class UsersComponent extends BaseComponent {
     async createUser(data: any) {
         try {
             await this._userEntity.create(data);
+        } catch (error: any) {
+            throw new Error(error);
+        }
+    }
+
+    async editUser(data: any, user: any) {
+        console.log("data edit", data);
+        try {
+            const result = await this._userEntity.update(user._id, data);
+            return result;
         } catch (error: any) {
             throw new Error(error);
         }

@@ -16,6 +16,10 @@ class Facade {
         return this._userComponent.createUser(data);
     }
 
+    editUser(data:any,user:any){
+        return this._userComponent.editUser(data,user);
+    }
+
     getUserInfo(data: any) {
         return this._userComponent.getUserInfo(data)
     }

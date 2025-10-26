@@ -11,6 +11,11 @@ export default class UserEntity extends BaseEntityMongoDb {
         return this._model.create(data)
     }
 
+    update(_id: string, data: any) {
+        return this._model.findByIdAndUpdate(_id, data, { new: true });
+    }
+
+
     getById(_id: string, obj: any = {}) {
         return this._model.findById(_id, obj);
     }
