@@ -4,10 +4,10 @@ import fs from 'fs';
 import path from 'path';
 import systemConfigs from './systemt-configs';
 
-const serviceAccountUser = require('./firebase-service-account.json');
+const serviceAccountUser = require('./firebase-account-user.json');
 // const apnKey = fs.readFileSync(path.join(__dirname, './AuthKey_4H4G77GJYL.p8'), 'utf8');
 
-const serviceAccountUserBo = require('./firebase-service-bo-account.json')
+const serviceAccountUserBo = require('./firebase-account-admin.json')
 
 
 export const firebaseAdminUser = admin.initializeApp(

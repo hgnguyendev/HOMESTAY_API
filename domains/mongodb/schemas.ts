@@ -49,12 +49,39 @@ const HOMESTAY = new Schema(
         amenities: Array,
         status: String,
         address: String
+    },
+    {
+        timestamps: true
     }
-)
+).pre('save', (next: any) => {
+    next();
+})
+
+const HOMESTAY_BOOKED = new Schema(
+    {
+        homestay_id: String,
+        roomName: String,
+        check_in_date: Date,
+        check_out_date: Date,
+        total_price: Number,
+        user_name_placer: String,
+        phone_placer: String,
+        status: String,
+        user_id: String,
+        email_user: String,
+        total_customer: Number
+    },
+    {
+        timestamps: true
+    }
+).pre('save', (next: any) => {
+    next();
+})
 
 export const SCHEMAS = {
     USERS,
     OTP_CODES,
     BO_USERS,
-    HOMESTAY
+    HOMESTAY,
+    HOMESTAY_BOOKED
 }

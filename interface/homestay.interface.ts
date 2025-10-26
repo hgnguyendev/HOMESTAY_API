@@ -3,7 +3,8 @@ export interface IImage {
 }
 
 export interface IAmenity {
-    amenity: string;  // ID hoặc tên tiện nghi
+    id:string;
+    name: string;  
 }
 
 // Khai báo kiểu trạng thái bằng string literal union

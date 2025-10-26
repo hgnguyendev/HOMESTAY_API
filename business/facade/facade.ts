@@ -1,4 +1,5 @@
 import BoUserComponent from "../components/bo-users.component";
+import HomeStayBookedComponent from "../components/homestay-booked.component";
 import HomeStayComponent from "../components/homestay.component";
 import OtpComponent from "../components/otp.component";
 import UsersComponent from "../components/users.component";
@@ -8,6 +9,7 @@ class Facade {
     private _boUserComponent = new BoUserComponent();
     private _otpComponent = new OtpComponent();
     private _homestayComponent = new HomeStayComponent();
+    private _homestayBookedComponent = new HomeStayBookedComponent();
 
     createUser(data: any) {
         return this._userComponent.createUser(data);
@@ -53,6 +55,12 @@ class Facade {
 
     searchHomeStay(data:any){
         return this._homestayComponent.searchHomestay(data);
+    }
+
+    //Homestay booked
+
+    createHomestayBooked(user:any,data:any){
+        return this._homestayBookedComponent.createHomestayBooked(user,data)
     }
 
 }
