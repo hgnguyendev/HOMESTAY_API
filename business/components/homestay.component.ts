@@ -101,6 +101,7 @@ class HomeStayComponent extends BaseComponent {
 
     async searchHomestay(data: any) {
         const { name, address, price, limit, skip, startDate, endDate } = data;
+        console.log("search", data);
 
         const skipNumber = parseInt(skip) || 0;
         const limitNumber = parseInt(limit) || 10;
@@ -125,12 +126,12 @@ class HomeStayComponent extends BaseComponent {
                 }
             }
 
-            if (startDate && endDate) {
-                filter.createdAt = {
-                    $gte: new Date(startDate),
-                    $lte: new Date(endDate),
-                };
-            }
+            const start = new Date(startDate);
+            start.setHours(0, 0, 0, 0);
+            const end = new Date(endDate);
+            end.setHours(23, 59, 59, 999);
+            filter.createdAt = { $gte: start, $lte: end };
+
 
             const response = await this._homestayEntity.getAll2(filter, {}, skipNumber, limitNumber);
             const total = await this._homestayEntity.countDocuments(filter);
