@@ -46,8 +46,8 @@ class Facade {
         return this._homestayComponent.createHomestay(data);
     }
 
-    getAllHomeStay() {
-        return this._homestayComponent.getAllHomeStay()
+    getAllHomeStay(data:any) {
+        return this._homestayComponent.getAllHomeStay(data)
     }
 
     deleteHomestay(id: any) {
@@ -69,8 +69,12 @@ class Facade {
     }
 
     //payment 
-    createPayment(data:any) {
-        return this._paymentComponent.createPayment(data);
+    createPayment(data:any,ip:string,user:any) {
+        return this._paymentComponent.createPayment(data,ip,user);
+    }
+
+    paymentResult(data:any){
+        return this._paymentComponent.handleIpn(data);
     }
 
 }

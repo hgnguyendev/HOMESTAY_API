@@ -69,7 +69,9 @@ const HOMESTAY_BOOKED = new Schema(
         status: String,
         user_id: String,
         email_user: String,
-        total_customer: Number
+        total_customer: Number,
+        order_id: String,
+        amount: Number,
     },
     {
         timestamps: true

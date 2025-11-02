@@ -19,14 +19,67 @@ class HomeStayComponent extends BaseComponent {
         }
     }
 
-    async getAllHomeStay() {
+    async getAllHomeStay(data: any) {
         try {
-            const result = await this._homestayEntity.getAll();
-            return result;
+            const {
+                limit = 2,
+                page = 1,
+                address,
+                minPrice,
+                maxPrice,
+                startDate,
+                endDate,
+            } = data;
+
+            const filter: any = {};
+
+            if (address) {
+                filter.address = { $regex: address, $options: "i" };
+            }
+
+            if (minPrice || maxPrice) {
+                filter.price = {};
+                if (minPrice) filter.price.$gte = Number(minPrice);
+                if (maxPrice) filter.price.$lte = Number(maxPrice);
+            }
+
+            if (startDate && endDate) {
+                const start = new Date(startDate);
+                start.setHours(0, 0, 0, 0); // bắt đầu ngày
+
+                const end = new Date(endDate);
+                end.setHours(23, 59, 59, 999); // cuối ngày
+
+                filter.createdAt = {
+                    $gte: start,
+                    $lte: end,
+                };
+            }
+
+            const limitNum = Number(limit) || 10;
+            const skip = (Number(page) - 1) * limitNum;
+
+            console.log({ filter, limitNum, skip });
+
+            const [result, total] = await Promise.all([
+                this._homestayEntity.getAll2(filter, {}, skip, limitNum),
+                this._homestayEntity.countDocuments(filter),
+            ]);
+
+            return {
+                data: result,
+                total,
+                page: Number(page),
+                limit: limitNum,
+            };
+
         } catch (error: any) {
-            throw new Error(error);
+            console.error("getAllHomeStay error:", error);
+            throw new Error(error.message);
         }
     }
+
+
 
     async editHomestay(id: string, data: IHomeStay) {
         try {
@@ -47,10 +100,7 @@ class HomeStayComponent extends BaseComponent {
     }
 
     async searchHomestay(data: any) {
-        const { name, address, price, limit, skip } = data;
-
-        console.log("Received data:", data);
-        console.log("Address received:", address);
+        const { name, address, price, limit, skip, startDate, endDate } = data;
 
         const skipNumber = parseInt(skip) || 0;
         const limitNumber = parseInt(limit) || 10;
@@ -75,7 +125,12 @@ class HomeStayComponent extends BaseComponent {
                 }
             }
 
-            console.log("Final filter:", filter);
+            if (startDate && endDate) {
+                filter.createdAt = {
+                    $gte: new Date(startDate),
+                    $lte: new Date(endDate),
+                };
+            }
 
             const response = await this._homestayEntity.getAll2(filter, {}, skipNumber, limitNumber);
             const total = await this._homestayEntity.countDocuments(filter);
