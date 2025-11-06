@@ -2,6 +2,7 @@ import BoUserComponent from "../components/bo-users.component";
 import HomeStayBookedComponent from "../components/homestay-booked.component";
 import HomeStayComponent from "../components/homestay.component";
 import OtpComponent from "../components/otp.component";
+import OtpForgotPassWordComponent from "../components/otpForgotPassWord.component";
 import PaymentComponent from "../components/payment.component";
 import UsersComponent from "../components/users.component";
 
@@ -12,12 +13,13 @@ class Facade {
     private _homestayComponent = new HomeStayComponent();
     private _homestayBookedComponent = new HomeStayBookedComponent();
     private _paymentComponent = new PaymentComponent();
+    private _otpForgotPassWordComponent = new OtpForgotPassWordComponent();
     createUser(data: any) {
         return this._userComponent.createUser(data);
     }
 
-    editUser(data:any,user:any){
-        return this._userComponent.editUser(data,user);
+    editUser(data: any, user: any) {
+        return this._userComponent.editUser(data, user);
     }
 
     getUserInfo(data: any) {
@@ -46,7 +48,7 @@ class Facade {
         return this._homestayComponent.createHomestay(data);
     }
 
-    getAllHomeStay(data:any) {
+    getAllHomeStay(data: any) {
         return this._homestayComponent.getAllHomeStay(data)
     }
 
@@ -69,12 +71,21 @@ class Facade {
     }
 
     //payment 
-    createPayment(data:any,ip:string,user:any) {
-        return this._paymentComponent.createPayment(data,ip,user);
+    createPayment(data: any, ip: string, user: any) {
+        return this._paymentComponent.createPayment(data, ip, user);
     }
 
-    paymentResult(data:any){
+    paymentResult(data: any) {
         return this._paymentComponent.handleIpn(data);
+    }
+
+    //otp forgot password
+    RenderOtpForgotPassWord(data: any) {
+        return this._otpForgotPassWordComponent.renderOtpForgotPassword(data);
+    }
+
+    CheckOtp(data:any){
+       return this._otpForgotPassWordComponent.CheckOtp(data) 
     }
 
 }

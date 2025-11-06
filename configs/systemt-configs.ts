@@ -23,6 +23,7 @@ const sysConfig = {
     vnp_hashsecret: process.env.VNP_HASHSECRET,
     vnp_url: process.env.VNP_URL,
     vnp_url_return: process.env.VNP_URL_RETURN,
+    email_service: process.env.EMAIL_SERVICE,
 
     log: (env?: keyof typeof log) => {
         if (env && log[env]) return log[env]();

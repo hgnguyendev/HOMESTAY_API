@@ -80,6 +80,17 @@ const HOMESTAY_BOOKED = new Schema(
     next();
 })
 
+const OTP_FORGOT_PASSWORD = new Schema(
+    {
+        email: String,
+        code: String,
+    },
+    {
+        timestamps: true,
+        expireAfterSeconds: 60
+    }
+)
+
 const PAYMENT = new Schema({
     orderId: String,
     userId: String,
@@ -97,6 +108,7 @@ const PAYMENT = new Schema({
 export const SCHEMAS = {
     USERS,
     OTP_CODES,
+    OTP_FORGOT_PASSWORD,
     BO_USERS,
     HOMESTAY,
     HOMESTAY_BOOKED,

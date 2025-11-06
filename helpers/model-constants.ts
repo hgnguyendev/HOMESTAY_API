@@ -5,7 +5,8 @@ const MONGODB = {
     BO_USERS: 'bo_users',
     HOMESTAY: 'homestay',
     HOMESTAY_BOOKED: 'homestay_booked',
-    PAYMENt: 'payment'
+    PAYMENt: 'payment',
+    OTP_FORGOT_PASSWORD:'otp_forgot_password'
   }
 }
 

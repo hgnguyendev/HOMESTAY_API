@@ -62,16 +62,12 @@ class PaymentComponent extends BaseComponent {
 
             console.log('Processing payment for order:', txnRef);
 
-            // 2. Tìm booking theo order_id (chính là txnRef)
             const booking = await this._homestayBookedEntity.findOne({ order_id: txnRef });
             if (!booking) {
                 console.log('Order not found:', txnRef);
                 return { success: false, message: 'Order not found' };
             }
 
-            console.log('Booking found:', booking);
-
-            // 3. So sánh số tiền
             if (booking.amount !== amountReturned) {
                 console.log(`Amount mismatch: DB=${booking.amount}, VNPay=${amountReturned}`);
                 await this._homestayBookedEntity.updateOne(
@@ -81,7 +77,6 @@ class PaymentComponent extends BaseComponent {
                 return { success: false, message: 'Amount mismatch' };
             }
 
-            // 4. Kiểm tra mã phản hồi
             if (responseCode === '00') {
                 console.log('Payment successful, updating status to paid');
                 await this._homestayBookedEntity.updateOne(
@@ -89,7 +84,7 @@ class PaymentComponent extends BaseComponent {
                     {
                         status: 'paid',
                         paidAt: new Date(),
-                        vnp_TransactionNo: data.vnp_TransactionNo, // Lưu thêm thông tin giao dịch
+                        vnp_TransactionNo: data.vnp_TransactionNo, 
                         vnp_BankCode: data.vnp_BankCode
                     }
                 );

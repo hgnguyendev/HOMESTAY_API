@@ -45,10 +45,10 @@ class HomeStayComponent extends BaseComponent {
 
             if (startDate && endDate) {
                 const start = new Date(startDate);
-                start.setHours(0, 0, 0, 0); // bắt đầu ngày
+                start.setHours(0, 0, 0, 0);
 
                 const end = new Date(endDate);
-                end.setHours(23, 59, 59, 999); // cuối ngày
+                end.setHours(23, 59, 59, 999);
 
                 filter.createdAt = {
                     $gte: start,
@@ -58,8 +58,6 @@ class HomeStayComponent extends BaseComponent {
 
             const limitNum = Number(limit) || 10;
             const skip = (Number(page) - 1) * limitNum;
-
-            console.log({ filter, limitNum, skip });
 
             const [result, total] = await Promise.all([
                 this._homestayEntity.getAll2(filter, {}, skip, limitNum),
@@ -115,22 +113,24 @@ class HomeStayComponent extends BaseComponent {
 
             if (address && address.trim()) {
                 filter.address = { $regex: address.trim(), $options: 'i' };
-                console.log("Searching with address filter:", filter.address);
             }
 
             if (price) {
-                // Xử lý price phù hợp (số hoặc range)
                 const priceNum = parseInt(price);
                 if (!isNaN(priceNum)) {
                     filter.price = priceNum;
                 }
             }
 
-            const start = new Date(startDate);
-            start.setHours(0, 0, 0, 0);
-            const end = new Date(endDate);
-            end.setHours(23, 59, 59, 999);
-            filter.createdAt = { $gte: start, $lte: end };
+            if (startDate || endDate) {
+                const start = startDate ? new Date(startDate) : new Date(0); 
+                start.setHours(0, 0, 0, 0);
+
+                const end = endDate ? new Date(endDate) : new Date(); 
+                end.setHours(23, 59, 59, 999);
+
+                filter.createdAt = { $gte: start, $lte: end };
+            }
 
 
             const response = await this._homestayEntity.getAll2(filter, {}, skipNumber, limitNumber);
