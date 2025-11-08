@@ -10,4 +10,8 @@ export default class OtpEntity extends BaseEntityMongoDb {
     create(data: any) {
         return this._model.create(data)
     }
+
+    getOne(filter: any, projection: any, options: any) {
+        return this._model.findOne(filter, projection, options);
+    }
 }

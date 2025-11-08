@@ -23,7 +23,15 @@ class Facade {
     }
 
     getUserInfo(data: any) {
-        return this._userComponent.getUserInfo(data)
+        return this._userComponent.getUserInfo(data);
+    }
+
+    getAllUser(){
+        return this._userComponent.getAllUser();
+    }
+
+    deleteUser(id:string){
+        return this._userComponent.deleteUser(id);
     }
 
     verifyToken(token: string) {
@@ -32,6 +40,10 @@ class Facade {
 
     createOtp(data: any) {
         return this._otpComponent.createOtp(data);
+    }
+
+    CheckOtpRegister(data:any){
+        return this._otpComponent.checkOtpRegister(data);
     }
 
     getUserBoInfo(user: any) {
@@ -78,6 +90,8 @@ class Facade {
     paymentResult(data: any) {
         return this._paymentComponent.handleIpn(data);
     }
+
+    //otp
 
     //otp forgot password
     RenderOtpForgotPassWord(data: any) {

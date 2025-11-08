@@ -14,6 +14,15 @@ class UsersComponent extends BaseComponent {
         }
     }
 
+    async getAllUser() {
+        try {
+            const response = await this._userEntity.getAll({});
+            return response;
+        } catch (error: any) {
+            throw new Error(error)
+        }
+    }
+
     async verifyToken(token: string) {
         try {
             const decodedToken = await firebaseAdminUser.auth().verifyIdToken(this._util.getToken(token), true);
@@ -55,6 +64,17 @@ class UsersComponent extends BaseComponent {
             throw new Error(error);
         }
     }
+
+    async deleteUser(id: string) {
+        try {
+            await firebaseAdminUser.auth().deleteUser(id);
+            await this._userEntity.deleteOne(id);
+            return this._handleSuccess({ message: 'Xoá user thành công', deletedId: id });
+        } catch (error: any) {
+            return this._handleException(error, 'UsersComponent', 'deleteUser', { id });
+        }
+    }
+
 }
 
 export default UsersComponent;

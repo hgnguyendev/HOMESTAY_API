@@ -32,9 +32,12 @@ const BO_USERS = new Schema(
 
 const OTP_CODES = new Schema(
     {
-        _id: String,
         code: Number,
         email: String
+    },
+    {
+        timestamps: true,
+        expireAfterSeconds: 60
     }
 )
 
