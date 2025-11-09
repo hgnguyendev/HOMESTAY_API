@@ -4,7 +4,8 @@ import { verifyFirebaseToken } from '../../middlewares/auth.middleware';
 const homestayBookedRouter = express.Router();
 
 
-homestayBookedRouter.post('/create-booked',verifyFirebaseToken,homestay_bookedController.createHomestayBooked)
+homestayBookedRouter.post('/create-booked',verifyFirebaseToken,homestay_bookedController.createHomestayBooked);
+homestayBookedRouter.put('/create-booked',verifyFirebaseToken,homestay_bookedController.editHomestayBooked)
 
 export default homestayBookedRouter;
 

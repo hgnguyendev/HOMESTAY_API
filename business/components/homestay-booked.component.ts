@@ -53,6 +53,15 @@ class HomeStayBookedComponent extends BaseComponent {
         }
     }
 
+    async editHomestayStatus(user: any, data: any) {
+        try {
+            const result = await this._homestayBookedEntity.updateOne({ status: 'paid' }, {}, {})
+            return result;
+        } catch (error: any) {
+            throw new Error(error);
+        }
+    }
+
 
 }
 

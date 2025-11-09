@@ -1,13 +1,15 @@
 import BaseComponent from "../../core/base-component";
 import vnp from "../../configs/vnpay";
 import HomeStayBookedEntity from "../entities/mongo/homestay_booked.entity";
+import { v4 as uuidv4 } from 'uuid';
 class PaymentComponent extends BaseComponent {
 
     private _homestayBookedEntity = new HomeStayBookedEntity();
 
     async createPayment(data: any, ip: any, user: any) {
         const { amount, roomName, check_in_date, check_out_date, total_customer, order_id, ipAddr, homestay_id } = data;
-        const vnp_TxnRef = order_id;
+        const vnp_TxnRef = uuidv4();
+        console.log("create payment data", data);
 
         try {
             await this._homestayBookedEntity.create({
@@ -22,6 +24,7 @@ class PaymentComponent extends BaseComponent {
                 email_user: user.email,
                 total_customer,
                 order_id,
+                txn_ref: vnp_TxnRef,
                 status: 'pending'
             })
 
@@ -42,15 +45,14 @@ class PaymentComponent extends BaseComponent {
     }
 
     async handleIpn(data: any) {
+        console.log("data payment succssessfully", data)
         try {
             console.log('IPN Data received:', data);
-
-            // 1. Xác thực chữ ký VNPay
             const verify = vnp.verifyReturnUrl(data);
             if (!verify.isSuccess) {
                 console.log('Signature verification failed');
                 await this._homestayBookedEntity.updateOne(
-                    { order_id: data.vnp_TxnRef }, // Sửa thành vnp_TxnRef
+                    { order_id: data.vnp_TxnRef },
                     { status: 'failed' }
                 );
                 return { success: false, message: 'Invalid signature' };
@@ -84,7 +86,7 @@ class PaymentComponent extends BaseComponent {
                     {
                         status: 'paid',
                         paidAt: new Date(),
-                        vnp_TransactionNo: data.vnp_TransactionNo, 
+                        vnp_TransactionNo: data.vnp_TransactionNo,
                         vnp_BankCode: data.vnp_BankCode
                     }
                 );

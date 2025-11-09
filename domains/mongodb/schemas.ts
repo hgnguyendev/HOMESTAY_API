@@ -51,7 +51,8 @@ const HOMESTAY = new Schema(
         description: String,
         amenities: Array,
         status: String,
-        address: String
+        address: String,
+        rating:Number
     },
     {
         timestamps: true
@@ -75,6 +76,7 @@ const HOMESTAY_BOOKED = new Schema(
         total_customer: Number,
         order_id: String,
         amount: Number,
+        txn_ref: String
     },
     {
         timestamps: true
@@ -82,6 +84,20 @@ const HOMESTAY_BOOKED = new Schema(
 ).pre('save', (next: any) => {
     next();
 })
+
+const COMMENTS = new Schema(
+    {
+        user_id: String,
+        name: String,
+        comment: String,
+        room_id: String,
+        images: Array,
+        rating: Number
+    },
+    {
+        timestamps: true
+    }
+)
 
 const OTP_FORGOT_PASSWORD = new Schema(
     {
@@ -115,5 +131,6 @@ export const SCHEMAS = {
     BO_USERS,
     HOMESTAY,
     HOMESTAY_BOOKED,
-    PAYMENT
+    PAYMENT,
+    COMMENTS
 }

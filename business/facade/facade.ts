@@ -1,4 +1,5 @@
 import BoUserComponent from "../components/bo-users.component";
+import CommentsComponent from "../components/comments.component";
 import HomeStayBookedComponent from "../components/homestay-booked.component";
 import HomeStayComponent from "../components/homestay.component";
 import OtpComponent from "../components/otp.component";
@@ -14,6 +15,8 @@ class Facade {
     private _homestayBookedComponent = new HomeStayBookedComponent();
     private _paymentComponent = new PaymentComponent();
     private _otpForgotPassWordComponent = new OtpForgotPassWordComponent();
+    private _commentsComponent = new CommentsComponent();
+
     createUser(data: any) {
         return this._userComponent.createUser(data);
     }
@@ -26,11 +29,11 @@ class Facade {
         return this._userComponent.getUserInfo(data);
     }
 
-    getAllUser(){
+    getAllUser() {
         return this._userComponent.getAllUser();
     }
 
-    deleteUser(id:string){
+    deleteUser(id: string) {
         return this._userComponent.deleteUser(id);
     }
 
@@ -42,7 +45,7 @@ class Facade {
         return this._otpComponent.createOtp(data);
     }
 
-    CheckOtpRegister(data:any){
+    CheckOtpRegister(data: any) {
         return this._otpComponent.checkOtpRegister(data);
     }
 
@@ -82,6 +85,10 @@ class Facade {
         return this._homestayBookedComponent.createHomestayBooked(user, data)
     }
 
+    editHomestayStatus(user: any, data: any) {
+        return this._homestayBookedComponent.editHomestayStatus(user, data);
+    }
+
     //payment 
     createPayment(data: any, ip: string, user: any) {
         return this._paymentComponent.createPayment(data, ip, user);
@@ -98,8 +105,17 @@ class Facade {
         return this._otpForgotPassWordComponent.renderOtpForgotPassword(data);
     }
 
-    CheckOtp(data:any){
-       return this._otpForgotPassWordComponent.CheckOtp(data) 
+    CheckOtp(data: any) {
+        return this._otpForgotPassWordComponent.CheckOtp(data);
+    }
+
+    //comments
+    createComments(user:any,data:any){
+        return this._commentsComponent.createComments(user,data);
+    }
+
+    getComments(room_id:string){
+        return this._commentsComponent.getComments(room_id);
     }
 
 }
