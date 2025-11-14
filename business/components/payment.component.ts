@@ -32,7 +32,7 @@ class PaymentComponent extends BaseComponent {
                 vnp_Amount: amount,
                 vnp_IpAddr: ip,
                 vnp_TxnRef: vnp_TxnRef,
-                vnp_OrderInfo: `Thanh toan don hang ${order_id}`,
+                vnp_OrderInfo: `${homestay_id}`,
                 vnp_OrderType: 'other' as any,
                 vnp_ReturnUrl: `http://localhost:4200/payment-result`,
                 vnp_Locale: 'vn' as any,

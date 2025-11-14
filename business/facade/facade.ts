@@ -89,6 +89,10 @@ class Facade {
         return this._homestayBookedComponent.editHomestayStatus(user, data);
     }
 
+    updateBookedPaymentSuccess(user:any,txnRef:any,data:any){
+        return this._homestayBookedComponent.updateBookedPaymentSuccess(user,txnRef,data);
+    }
+
     //payment 
     createPayment(data: any, ip: string, user: any) {
         return this._paymentComponent.createPayment(data, ip, user);

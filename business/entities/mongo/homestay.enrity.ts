@@ -27,6 +27,10 @@ export default class HomeStayEntity extends BaseEntityMongoDb {
             .exec();
     }
 
+    findOne(filter: any, projection: any, options: any) {
+        return this._model.findOne(filter, projection, options);
+    }
+
     update(_id: string, data: any) {
         return this._model.findByIdAndUpdate(_id, data, { new: true });
     }
