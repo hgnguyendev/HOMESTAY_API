@@ -1,3 +1,4 @@
+import { resolveSoa } from "dns";
 import BaseComponent from "../../core/base-component";
 import EmailUtil from "../../helpers/email-util";
 import { IHomestayBooked } from "../../interface/homestay_booked.interface";
@@ -38,6 +39,7 @@ class HomeStayBookedComponent extends BaseComponent {
                 check_in_date: { $lt: new Date(check_out_date) },
                 check_out_date: { $gt: new Date(check_in_date) }
             });
+
 
             if (overlappingBooking) {
                 throw new Error('Khoảng thời gian này đã có người đặt phòng');
@@ -129,6 +131,27 @@ class HomeStayBookedComponent extends BaseComponent {
         }
     }
 
+    async listHomestayBooked(homestay_id: string) {
+        try {
+            const response = await this._homestayBookedEntity.getHomestayBooked(homestay_id);
+            console.log("responsse", response)
+            return response;
+        } catch (error: any) {
+            throw new Error(error);
+        }
+    }
+
+    async getHomestayBookedByUser(user: any) {
+        try {
+            const filters = {
+                user_id: user._id
+            }
+            const response = await this._homestayBookedEntity.getAll(filters, {}, {});
+            return response;
+        } catch (error: any) {
+            throw new Error(error);
+        }
+    }
 
 
 }

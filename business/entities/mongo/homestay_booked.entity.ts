@@ -11,8 +11,13 @@ export default class HomeStayBookedEntity extends BaseEntityMongoDb {
         return this._model.create(data)
     }
 
-    getAll() {
-        return this._model.find();
+    getAll(filters: any, projection: any, options: any) {
+        return this._model.find(filters, projection, options);
+    }
+
+
+    getHomestayBooked(homestay_id: string) {
+        return this._model.find({ homestay_id: homestay_id });
     }
 
     updateOne(filter: any, update: any, options: any = {}) {

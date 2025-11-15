@@ -89,10 +89,17 @@ class Facade {
         return this._homestayBookedComponent.editHomestayStatus(user, data);
     }
 
-    updateBookedPaymentSuccess(user:any,txnRef:any,data:any){
-        return this._homestayBookedComponent.updateBookedPaymentSuccess(user,txnRef,data);
+    updateBookedPaymentSuccess(user: any, txnRef: any, data: any) {
+        return this._homestayBookedComponent.updateBookedPaymentSuccess(user, txnRef, data);
     }
 
+    listHomestayBooked(homestay_id: string) {
+        return this._homestayBookedComponent.listHomestayBooked(homestay_id);
+    }
+
+    getHomestayBookedByUser(user: any) {
+        return this._homestayBookedComponent.getHomestayBookedByUser(user)
+    }
     //payment 
     createPayment(data: any, ip: string, user: any) {
         return this._paymentComponent.createPayment(data, ip, user);
@@ -114,11 +121,11 @@ class Facade {
     }
 
     //comments
-    createComments(user:any,data:any){
-        return this._commentsComponent.createComments(user,data);
+    createComments(user: any, data: any) {
+        return this._commentsComponent.createComments(user, data);
     }
 
-    getComments(room_id:string){
+    getComments(room_id: string) {
         return this._commentsComponent.getComments(room_id);
     }
 

@@ -7,11 +7,23 @@ class PaymentComponent extends BaseComponent {
     private _homestayBookedEntity = new HomeStayBookedEntity();
 
     async createPayment(data: any, ip: any, user: any) {
-        const { amount, roomName, check_in_date, check_out_date, total_customer, order_id, ipAddr, homestay_id } = data;
+        const { amount, roomName, check_in_date, check_out_date, total_customer, order_id, ipAddr, homestay_id, images } = data;
         const vnp_TxnRef = uuidv4();
-        console.log("create payment data", data);
-
         try {
+
+            const overlappingBooking = await this._homestayBookedEntity.findOne({
+                homestay_id: homestay_id,
+                check_in_date: { $lt: new Date(check_out_date) },
+                check_out_date: { $gt: new Date(check_in_date) }
+            });
+
+
+            if (overlappingBooking) {
+                throw new Error('Khoảng thời gian này đã có người đặt phòng');
+            }
+
+            console.log("overlap", overlappingBooking);
+
             await this._homestayBookedEntity.create({
                 homestay_id,
                 user_id: user._id,
@@ -25,7 +37,8 @@ class PaymentComponent extends BaseComponent {
                 total_customer,
                 order_id,
                 txn_ref: vnp_TxnRef,
-                status: 'pending'
+                status: 'pending',
+                images
             })
 
             const paymentUrl = vnp.buildPaymentUrl({

@@ -18,7 +18,7 @@ export default class UserEntity extends BaseEntityMongoDb {
     async getByEmail(email: string) {
         return this._model.findOne({ email });
     }
-
+   
     update(_id: string, data: any) {
         return this._model.findByIdAndUpdate(_id, data, { new: true });
     }

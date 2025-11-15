@@ -77,6 +77,7 @@ const HOMESTAY_BOOKED = new Schema(
         order_id: String,
         amount: Number,
         txn_ref: String,
+        images: Array,
     },
     {
         timestamps: true
