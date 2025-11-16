@@ -52,7 +52,8 @@ const HOMESTAY = new Schema(
         amenities: Array,
         status: String,
         address: String,
-        rating: Number
+        rating: Number,
+        totalRoom: Number
     },
     {
         timestamps: true
@@ -78,7 +79,9 @@ const HOMESTAY_BOOKED = new Schema(
         amount: Number,
         txn_ref: String,
         images: Array,
-        address: String
+        address: String,
+        totalRoom: Number,
+        price_room: Number
     },
     {
         timestamps: true

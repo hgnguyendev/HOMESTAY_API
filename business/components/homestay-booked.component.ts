@@ -77,7 +77,7 @@ class HomeStayBookedComponent extends BaseComponent {
     }
 
     async updateBookedPaymentSuccess(user: any, txn_ref: string, data: any) {
-        const { _id } = data;
+        const { _id, status } = data;
         console.log(user)
 
         if (!txn_ref) {
@@ -87,8 +87,12 @@ class HomeStayBookedComponent extends BaseComponent {
         try {
             const response = await this._homestayBookedEntity.updateOne(
                 { txn_ref: txn_ref },
-                { $set: { status: 'paid' } }
+                { $set: { status: status } }
             );
+
+            if (status === 'cancel') {
+                return response;
+            }
 
             const homestay = await this._homestayEntity.findOne({ _id: _id }, {}, {});
 
@@ -141,13 +145,32 @@ class HomeStayBookedComponent extends BaseComponent {
         }
     }
 
-    async getHomestayBookedByUser(user: any) {
+    async getHomestayBookedByUser(user: any, query: any) {
+        const { status } = query;
+        console.log("status",status)
         try {
             const filters = {
-                user_id: user._id
+                user_id: user._id,
+                status
             }
             const response = await this._homestayBookedEntity.getAll(filters, {}, {});
             return response;
+        } catch (error: any) {
+            throw new Error(error);
+        }
+    }
+
+    async deleteHomestayBooked(user: any, id: string) {
+        if (!user) {
+            throw new Error("No User ");
+        }
+
+        if (!id) {
+            throw new Error('id error');
+        }
+        try {
+            await this._homestayBookedEntity.deleteOne(id);
+            return 'delete homestay booked successfully'
         } catch (error: any) {
             throw new Error(error);
         }

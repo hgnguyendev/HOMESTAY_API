@@ -7,7 +7,7 @@ class PaymentComponent extends BaseComponent {
     private _homestayBookedEntity = new HomeStayBookedEntity();
 
     async createPayment(data: any, ip: any, user: any) {
-        const { amount, roomName, check_in_date, check_out_date, total_customer, order_id, ipAddr, homestay_id, images, address } = data;
+        const { amount, roomName, check_in_date, check_out_date, total_customer, order_id, ipAddr, homestay_id, images, address, totalRoom,price_room } = data;
         const vnp_TxnRef = uuidv4();
         try {
 
@@ -39,7 +39,9 @@ class PaymentComponent extends BaseComponent {
                 txn_ref: vnp_TxnRef,
                 status: 'pending',
                 images,
-                address
+                address,
+                totalRoom,
+                price_room
             })
 
             const paymentUrl = vnp.buildPaymentUrl({

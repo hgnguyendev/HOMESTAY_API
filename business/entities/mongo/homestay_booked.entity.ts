@@ -27,4 +27,8 @@ export default class HomeStayBookedEntity extends BaseEntityMongoDb {
     findOne(filter: any, projection: any = {}, options: any = {}) {
         return this._model.findOne(filter, projection, options);
     }
+
+    deleteOne(id: string) {
+        return this._model.deleteOne({ _id: id });
+    }
 }
