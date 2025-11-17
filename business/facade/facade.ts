@@ -79,6 +79,10 @@ class Facade {
         return this._homestayComponent.searchHomestay(data);
     }
 
+    getHomestayFeatures(){
+        return this._homestayComponent.getHomestayFeatured();
+    }
+
     //Homestay booked
 
     createHomestayBooked(user: any, data: any) {

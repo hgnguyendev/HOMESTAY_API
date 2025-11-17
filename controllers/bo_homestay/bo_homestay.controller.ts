@@ -6,6 +6,7 @@ class BoHomeStayController extends BaseController {
    deleteHomestay: any = this._call((req: any, data: any) => this._facade.deleteHomestay(req.params._id))
    editHomestay:any = this._call((req:any,data:any) => this._facade.editHomestay(req.params._id,req.body))
    SearchHomestay:any = this._call((req:any,data:any) => this._facade.searchHomeStay(req.query));
+   getHomestayFeatures:any = this._call((req:any,data:any) => this._facade.getHomestayFeatures());
 
 }
 

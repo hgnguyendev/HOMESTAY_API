@@ -31,6 +31,16 @@ export default class HomeStayEntity extends BaseEntityMongoDb {
         return this._model.findOne(filter, projection, options);
     }
 
+    getFeatured(limit: number = 5) {
+        return this._model
+            .find({ rating: { $gt: 0 } }) 
+            .sort({ rating: -1 })        
+            .limit(limit)
+            .exec();
+    }
+
+
+
     update(_id: string, data: any) {
         return this._model.findByIdAndUpdate(_id, data, { new: true });
     }
