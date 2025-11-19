@@ -7,6 +7,7 @@ class HomestayBookedController extends BaseController {
     listHomestayBooked:any = this._call((req:any,data:any) => this._facade.listHomestayBooked(req.params.homestay_id));
     getHomestayBookedUser:any = this._call((req:any,data:any) => this._facade.getHomestayBookedByUser(req.user,req.query));
     deleteHomestayBooked:any = this._call((req:any,data:any) => this._facade.deleteHomestayBookedUser(req.user,req.params._id))
+    getAllHomestayBooked:any = this._call((req:any,data:any) => this._facade.getAllHomestayBooked());
 
 }
 

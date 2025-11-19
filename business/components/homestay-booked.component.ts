@@ -147,7 +147,7 @@ class HomeStayBookedComponent extends BaseComponent {
 
     async getHomestayBookedByUser(user: any, query: any) {
         const { status } = query;
-        console.log("status",status)
+        console.log("status", status)
         try {
             const filters = {
                 user_id: user._id,
@@ -173,6 +173,15 @@ class HomeStayBookedComponent extends BaseComponent {
             return 'delete homestay booked successfully'
         } catch (error: any) {
             throw new Error(error);
+        }
+    }
+
+    async getAllHomestayBooked() {
+        try {
+            const response = await this._homestayBookedEntity.getAll({}, {}, {});
+            return response;
+        } catch (error: any) {
+            throw new Error(error)
         }
     }
 

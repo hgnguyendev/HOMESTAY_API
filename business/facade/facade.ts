@@ -137,6 +137,10 @@ class Facade {
         return this._commentsComponent.getComments(room_id);
     }
 
+    getAllHomestayBooked(){
+        return this._homestayBookedComponent.getAllHomestayBooked();
+    }
+
 }
 
 export default new Facade();

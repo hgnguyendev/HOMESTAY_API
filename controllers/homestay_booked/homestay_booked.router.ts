@@ -10,6 +10,7 @@ homestayBookedRouter.put('/booked-payment/:txn_ref', verifyFirebaseToken, homest
 homestayBookedRouter.get('/homestay-booked/:homestay_id',homestay_bookedController.listHomestayBooked);
 homestayBookedRouter.get('/homestay-booked-user',verifyFirebaseToken,homestay_bookedController.getHomestayBookedUser);
 homestayBookedRouter.delete('/homestay-booked-user/:_id',verifyFirebaseToken,homestay_bookedController.deleteHomestayBooked);
+homestayBookedRouter.get('/get-all-booked',homestay_bookedController.getAllHomestayBooked);
 
 export default homestayBookedRouter;
 
