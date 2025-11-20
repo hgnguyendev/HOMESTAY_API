@@ -15,6 +15,7 @@ const USERS = new Schema(
         user_id: String,
         connect_device: Boolean,
         tokens: Array,
+        address: String
     },
     {
         timestamps: true
